@@ -1,7 +1,13 @@
 <script lang="ts">
+    import { getWalletAddress } from "../service/blockchain";
+
+
 
     let saldo = 1000000
     let saldoFormateado = '';
+
+    let miWallet = getWalletAddress();
+    console.info("mi wallet es: ", miWallet);
 
     $: if ( saldo > 0 ) {
 
