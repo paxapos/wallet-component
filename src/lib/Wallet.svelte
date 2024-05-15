@@ -1,6 +1,20 @@
 <script lang="ts">
     import { getWalletAddress } from "../service/blockchain";
 
+    //npm i @stellar/stellar-sdk
+    //descargamos las dependencias y las importamos al proyecto
+    import  * as StellarSdk  from "@stellar/stellar-sdk"
+    
+    //creamos dos cuentas con su par de claves
+    let cuenta1= StellarSdk.Keypair.random()
+    console.log(cuenta1)
+    let cuenta2= StellarSdk.Keypair.random()
+    console.log(cuenta2)
+
+    //conectamos con la testnet de stellar
+    let server=new StellarSdk.Horizon.Server("https://horizon-testnet.stellar.org")
+    console.log(server)
+
 
 
     let saldo = 1000000
