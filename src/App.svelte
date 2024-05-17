@@ -4,6 +4,11 @@
 	import Wallet from './lib/Wallet.svelte';
 	import { Card, Heading, Hr, Span } from 'flowbite-svelte';
 	import WalletQr from './lib/WalletQR.svelte';
+	import { stellarAccount1 } from './stellar_account';
+	import WalletSaldoHistory from './lib/WalletSaldoHistory.svelte';
+
+	// cargar pubKey de stellar
+	const addr = stellarAccount1.pubKey;
 </script>
 
 <main class="flex flex-col max-w-max m-auto p-10">
@@ -31,13 +36,19 @@
 		<Card class="m-auto">
 			<h1 class="text-2xl font-bold mb-4">componente: Wallet</h1>
 
-			<Wallet />
+			<Wallet address={addr} />
 		</Card>
 
 		<Card class="m-auto">
 			<h1 class="text-2xl font-bold mb-4">componente: QR</h1>
 
 			<WalletQr value="http://unaweb.com" />
+		</Card>
+
+		<Card class="m-auto">
+			<h1 class="text-2xl font-bold mb-4">componente: QR</h1>
+
+			<WalletSaldoHistory />
 		</Card>
 	</div>
 </main>

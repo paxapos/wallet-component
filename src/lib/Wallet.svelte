@@ -1,28 +1,18 @@
 <script lang="ts">
-	import { getWalletAddress } from '../service/blockchain';
 	import { ButtonGroup, Button } from 'flowbite-svelte';
+	import { getSaldo } from '../service/blockchains/stellar';
 
-	//npm i @stellar/stellar-sdk
-	//descargamos las dependencias y las importamos al proyecto
-	import * as StellarSdk from '@stellar/stellar-sdk';
+	export let address: string;
 
-	//creamos dos cuentas con su par de claves
-	let cuenta1 = StellarSdk.Keypair.random();
-	console.log(cuenta1);
-	let cuenta2 = StellarSdk.Keypair.random();
-	console.log(cuenta2);
+	let saldo = 0;
 
-	//conectamos con la testnet de stellar
-	let server = new StellarSdk.Horizon.Server(
-		'https://horizon-testnet.stellar.org',
-	);
-	console.log(server);
+	getSaldo(address).then((res) => {
+		saldo = res;
+	});
 
-	let saldo = 1000000;
 	let saldoFormateado = '';
 
-	let miWallet = getWalletAddress();
-	console.info('mi wallet es: ', miWallet);
+	console.info('Wallet component loaded address: ', address);
 
 	$: if (saldo > 0) {
 		const formateador = new Intl.NumberFormat('es-AR', {
