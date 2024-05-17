@@ -1,3 +1,23 @@
 {
-  "recommendations": ["svelte.svelte-vscode"]
+  "recommendations": [
+    "svelte.svelte-vscode",
+    "bradlc.vscode-tailwindcss",
+    "vscode-icons-team.vscode-icons",
+    "formulahendry.auto-rename-tag",
+    "phoenisx.cssvar",
+    "editorconfig.editorconfig",
+    "dbaeumer.vscode-eslint",
+    "mhutchie.git-graph",
+    "github.copilot",
+    "github.copilot-chat",
+    "eamodio.gitlens",
+    "ecmel.vscode-html-css",
+    "kisstkondoros.vscode-gutter-preview",
+    "christian-kohler.path-intellisense",
+    "esbenp.prettier-vscode",
+    "rvest.vs-code-prettier-eslint",
+    "ardenivanov.svelte-intellisense",
+    "gruntfuggly.todo-tree",
+    "shardulm94.trailing-spaces"
+  ]
 }

@@ -1,0 +1,5 @@
+.vscode-test/
+out/
+dist/
+public/
+node_modules/
