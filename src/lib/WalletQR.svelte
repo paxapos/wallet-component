@@ -1,5 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
+
+	// @ts-expect-error
 	import { default as QrCode } from 'qrious';
 
 	const QRcode = new QrCode();
