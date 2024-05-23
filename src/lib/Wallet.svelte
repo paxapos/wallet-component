@@ -34,6 +34,16 @@
 	const pagar = () => {
 		alert('Pagando');
 	};
+
+	import {stellarAccount2,stellarAccount1, } from '../stellar_account';
+
+
+
+	/*De esta manera se ejecutaria una transacción en la testnet de stellar*/
+	import {envio} from '../service/blockchains/walletsend'
+
+	envio("1000",stellarAccount1,stellarAccount2)
+
 </script>
 
 <div class="flex items-center flex-wrap gap-4">
