@@ -6,6 +6,7 @@
 	import WalletQr from './lib/WalletQR.svelte';
 	import { stellarAccount1 } from './stellar_account';
 	import WalletSaldoHistory from './lib/WalletSaldoHistory.svelte';
+	import InputPagar from './lib/InputPagar.svelte';
 
 	// cargar pubKey de stellar
 	const addr = stellarAccount1.pubKey;
@@ -49,6 +50,12 @@
 			<h1 class="text-2xl font-bold mb-4">componente: QR</h1>
 
 			<WalletSaldoHistory />
+		</Card>
+
+		<Card class="m-auto">
+			<h1 class="text-2xl font-bold mb-4">componente: Input Pagar</h1>
+
+			<InputPagar stellarAccount={stellarAccount1} />
 		</Card>
 	</div>
 </main>

@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { ButtonGroup, Button } from 'flowbite-svelte';
+	import { ButtonGroup, Button, Modal, Input } from 'flowbite-svelte';
 	import { getSaldo } from '../service/blockchains/stellar';
+	import WalletQR from './WalletQR.svelte';
 
 	export let address: string;
 
@@ -27,26 +28,57 @@
 		saldoFormateado = 'Sin saldo';
 	}
 
+	let openModalQR = false;
 	function generarQr() {
-		alert('Generando QR');
+		openModalQR = true;
 	}
 
-	const pagar = () => {
-		alert('Pagando');
-	};
+	let openModalPagar = false;
+	function pagar() {
+		openModalPagar = true;
+	}
 
-	import {stellarAccount2,stellarAccount1, } from '../stellar_account';
-
-
+	import { stellarAccount2, stellarAccount1 } from '../stellar_account';
 
 	/*De esta manera se ejecutaria una transacción en la testnet de stellar*/
-	import {envio} from '../service/blockchains/walletsend'
+	import InputPagar from './InputPagar.svelte';
 
-	envio("1000",stellarAccount1,stellarAccount2)
+	let paymentDone: PaymentDone | null = null;
 
+	function manejarPagoRealizado(event: CustomEvent<PaymentDone>) {
+		paymentDone = event.detail;
+		openModalPagar = false;
+	}
 </script>
 
+<Modal bind:open={openModalQR} autoclose>
+	<div class="m-auto text-center flex justify-center align-middle">
+		<WalletQR value={stellarAccount1.pubKey} />
+	</div>
+</Modal>
+
+<Modal bind:open={openModalPagar} autoclose>
+	<div class="m-auto text-center flex justify-center align-middle">
+		<InputPagar
+			stellarAccount={stellarAccount1}
+			on:paymentDone={manejarPagoRealizado}
+		/>
+	</div>
+</Modal>
+
 <div class="flex items-center flex-wrap gap-4">
+	{#if paymentDone}
+		<div
+			class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
+			role="alert"
+		>
+			<strong class="font-bold">Pago realizado!</strong>
+			<span class="block sm:inline"
+				>Se envió {paymentDone.amount} a {paymentDone.destination}</span
+			>
+		</div>
+	{/if}
+
 	<h1>{saldoFormateado}</h1>
 	<ButtonGroup>
 		<Button on:click={generarQr}>Generar QR</Button>

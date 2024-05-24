@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
 
 	// @ts-expect-error
@@ -6,11 +6,11 @@
 
 	const QRcode = new QrCode();
 
+	export let value: string;
 	export let errorCorrection = 'L';
 	export let background = '#fff';
 	export let color = '#000';
 	export let size = '200';
-	export let value = '';
 	export let padding = 0;
 	export let className = 'qrcode';
 
