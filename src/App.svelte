@@ -34,9 +34,7 @@
 	</p>
 
 	<div class="flex flex-col gap-8 my-10">
-		<Card class="m-auto">
-			<h1 class="text-2xl font-bold mb-4">componente: Wallet</h1>
-
+		<Card padding="xl" size="md" class="border-blue-900  items-center  bg-blue-400 m-auto">
 			<Wallet address={addr} />
 		</Card>
 
@@ -47,15 +45,10 @@
 		</Card>
 
 		<Card class="m-auto">
-			<h1 class="text-2xl font-bold mb-4">componente: QR</h1>
+			<h1 class="text-2xl font-bold mb-4">Actividad</h1>
 
 			<WalletSaldoHistory />
 		</Card>
 
-		<Card class="m-auto">
-			<h1 class="text-2xl font-bold mb-4">componente: Input Pagar</h1>
-
-			<InputPagar stellarAccount={stellarAccount1} />
-		</Card>
 	</div>
 </main>
