@@ -1,15 +1,29 @@
 <script lang="ts">
 	import { ButtonGroup, Button, Modal, Input } from 'flowbite-svelte';
-	import { getSaldo } from '../service/blockchains/stellar';
+	import {
+		eventSourceListener,
+		getBalance,
+	} from '../service/blockchains/stellar';
 	import WalletQR from './WalletQR.svelte';
 
 	export let address: string;
 
 	let saldo = 0;
 
-	getSaldo(address).then((res) => {
+	getBalance(address).then((res) => {
 		saldo = res;
 	});
+
+	eventSourceListener(
+		address,
+		async (res: any) => {
+			console.info('me llego un mensaje', res);
+			saldo = await getBalance(address);
+		},
+		(msgError: any) => {
+			console.error('me paso algo malisimo');
+		},
+	);
 
 	let saldoFormateado = '';
 
@@ -42,6 +56,7 @@
 
 	/*De esta manera se ejecutaria una transacción en la testnet de stellar*/
 	import InputPagar from './InputPagar.svelte';
+	import { get } from 'svelte/store';
 
 	let paymentDone: PaymentDone | null = null;
 

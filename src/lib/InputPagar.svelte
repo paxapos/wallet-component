@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { Alert, Button, Input, Select } from 'flowbite-svelte';
+	import { Input, Select } from 'flowbite-svelte';
 	import { createEventDispatcher } from 'svelte';
-	import { envio } from '../service/blockchains/walletsend';
 	import { AssetCodes } from '../globals';
+	import { createPayment } from '../service/blockchains/stellar';
 
 	export let stellarAccount: User;
 
@@ -33,7 +33,7 @@
 		// Aquí puedes agregar la lógica para manejar el envío del formulario
 		console.log(`Amount: ${amount}, Recipient: ${recipient}`);
 
-		const seEnvio = await envio(amount, stellarAccount, recipient);
+		const seEnvio = await createPayment(amount, stellarAccount, recipient);
 
 		const paymentDone: PaymentDone = {
 			amount,

@@ -34,7 +34,11 @@
 	</p>
 
 	<div class="flex flex-col gap-8 my-10">
-		<Card padding="xl" size="md" class="border-blue-900  items-center  bg-blue-400 m-auto">
+		<Card
+			padding="xl"
+			size="md"
+			class="border-blue-900  items-center  bg-blue-400 m-auto"
+		>
 			<Wallet address={addr} />
 		</Card>
 
@@ -49,6 +53,5 @@
 
 			<WalletSaldoHistory />
 		</Card>
-
 	</div>
 </main>
