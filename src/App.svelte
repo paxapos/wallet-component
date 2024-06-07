@@ -42,16 +42,6 @@
 			<Wallet address={addr} />
 		</Card>
 
-		<Card class="m-auto">
-			<h1 class="text-2xl font-bold mb-4">componente: QR</h1>
-
-			<WalletQr value="http://unaweb.com" />
-		</Card>
-
-		<Card class="m-auto">
-			<h1 class="text-2xl font-bold mb-4">Actividad</h1>
-
-			<WalletSaldoHistory />
-		</Card>
+		
 	</div>
 </main>
