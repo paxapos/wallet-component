@@ -5,6 +5,9 @@
 		getBalance,
 	} from '../service/blockchains/stellar';
 	import WalletQR from './WalletQR.svelte';
+	
+	import {  Dropdown, DropdownItem, DropdownHeader, Avatar } from 'flowbite-svelte';
+  	import { BellSolid, EyeSolid } from 'flowbite-svelte-icons';
 
 	export let address: string;
 
@@ -116,4 +119,44 @@
 		</svg>
 		</Button>
 	</ButtonGroup>
+	<div id="bell" class=" inline-flex items-center text-sm font-medium text-center text-black hover:text-blue-800 focus:outline-none dark:hover:text-white dark:text-dark">
+		<BellSolid class="w-8 h-8" />
+		<div class="flex relative">
+		  <div class="inline-flex relative -top-2 end-4 w-3 h-3 bg-red-700 rounded-full border-2 border-white dark:border-gray-800" />
+		</div>
+	  </div>
+	  <Dropdown triggeredBy="#bell" class="w-full max-w-sm rounded divide-y divide-dark-100 shadow dark:bg-black dark:divide-black">
+		<div slot="header" class="bg-blue-200 text-center py-2 font-bold">Notifications</div>
+		<DropdownItem class="flex space-x-4 rtl:space-x-reverse">
+		  <Avatar src="/images/profile-picture-1.webp" dot={{ color: 'bg-dark' }} rounded />
+		  <div class="ps-3 w-full">
+			<div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">
+			  Nueva trasferencia de <span class="font-semibold text-gray-900 dark:text-white">Jese Leos</span>
+			  : Ha trasferido $500
+			</div>
+			<div class="text-xs text-primary-600 dark:text-primary-500">a few moments ago</div>
+		  </div>
+		</DropdownItem>
+		<DropdownItem class="flex space-x-4 rtl:space-x-reverse">
+			<Avatar src="/images/profile-picture-1.webp" dot={{ color: 'bg-dark' }} rounded />
+			<div class="ps-3 w-full">
+			  <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">
+				Nueva trasferencia de <span class="font-semibold text-gray-900 dark:text-white">Jese Leos</span>
+				: Ha trasferido $500
+			  </div>
+			  <div class="text-xs text-primary-600 dark:text-primary-500">a few moments ago</div>
+			</div>
+		  </DropdownItem>
+		  <DropdownItem class="flex space-x-4 rtl:space-x-reverse">
+			<Avatar src="/images/profile-picture-1.webp" dot={{ color: 'bg-dark' }} rounded />
+			<div class="ps-3 w-full">
+			  <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">
+				Nueva trasferencia de <span class="font-semibold text-gray-900 dark:text-white">Jese Leos</span>
+				: Ha trasferido $500
+			  </div>
+			  <div class="text-xs text-primary-600 dark:text-primary-500">a few moments ago</div>
+			</div>
+		  </DropdownItem>
+		
+	  </Dropdown>
 </div>
