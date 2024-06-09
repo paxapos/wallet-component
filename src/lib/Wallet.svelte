@@ -97,7 +97,7 @@
 		</div>
 	{/if}
 
-	<h1 class="text-gray-800 text-2xl sixa-max">{saldoFormateado}</h1>
+	<h1 class="text-gray-800 text-3xl sixa-max">{saldoFormateado}</h1>
 	<ButtonGroup>
 		<Button outline color="blue" on:click={generarQr}>
 			Generar QR
