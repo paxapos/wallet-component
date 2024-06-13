@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { ButtonGroup, Button, Modal, Input } from 'flowbite-svelte';
 	import {
-		eventSourceListener,
 		getBalance,
 	} from '../service/blockchains/stellar';
 	import WalletQR from './WalletQR.svelte';
@@ -16,8 +15,15 @@
 	getBalance(address).then((res) => {
 		saldo = res;
 	});
-
-	eventSourceListener(
+	function updatebalance(time:number){
+		setTimeout(() => {
+			getBalance(address).then((res) => {
+				saldo = res;
+				console.log("Saldo:", saldo); // Display the balance
+			});
+			}, time); // 20000 milliseconds = 20 seconds
+	}
+	/*eventSourceListener(
 		address,
 		async (res: any) => {
 			console.info('me llego un mensaje', res);
@@ -27,6 +33,7 @@
 			console.error('me paso algo malisimo');
 		},
 	);
+	*/
 
 	let saldoFormateado = '';
 
@@ -48,11 +55,13 @@
 	let openModalQR = false;
 	function generarQr() {
 		openModalQR = true;
+		updatebalance(20000)
 	}
 
 	let openModalPagar = false;
 	function pagar() {
 		openModalPagar = true;
+		updatebalance(10000)
 	}
 
 	import { stellarAccount2, stellarAccount1 } from '../stellar_account';
