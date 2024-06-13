@@ -12,7 +12,7 @@ const server = new StellarSdk.Horizon.Server(stellarNetwork);
  *
  */
 const network = Networks.TESTNET;
-
+/*
 export async function eventSourceListener(
 	account: string,
 	cb: Function,
@@ -31,7 +31,7 @@ export async function eventSourceListener(
 		errCb(error);
 	};
 }
-
+*/
 export async function getBalance(
 	addr: string,
 	assetCode: AssetCodes = AssetCodes.XLM,
