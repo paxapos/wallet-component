@@ -85,7 +85,7 @@ export async function createPayment(
 				//en esta linea esta el problema de que monto si o si se tiene que ingresar como un string
 				//a su vez monto es la cantidad de dinero que se quiere enviar a una cuenta en una transaccion
 				//por lo que tendria que ingresarse como un entero
-				asset: new Asset(assetCode, payer.pubKey),
+				asset: Asset.native(),
 			}),
 		);
 		let operation2 = operation1.setTimeout(100);
