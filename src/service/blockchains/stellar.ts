@@ -100,3 +100,11 @@ export async function createPayment(
 		console.log('No se pudo completar la transacción');
 	}
 }
+
+export async function paymentsdones() {
+	const payments = await server.payments().forAccount("GDNHIOSGUNBCZ7PNU7TLE4MPMUUHNDECZ7534MNI2BHRGLDIXDQTL3PG").call();
+  
+	console.log(payments);
+  }
+  
+  paymentsdones();
