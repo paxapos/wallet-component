@@ -46,7 +46,7 @@
 	});
 </script>
 
-<div  class=" flex items-center justify-center  "
+<div  class=" fixed inset-0  flex items-center justify-center  "
 >
 	<div class=" bg-blue-200 p-6 rounded-lg shadow-lg w-200 ">
 		<h1 class="text-gray-800 text-3xl sixa-max"> QR</h1>
