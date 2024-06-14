@@ -7,7 +7,7 @@
 	
 	import {  Dropdown, DropdownItem, DropdownHeader, Avatar } from 'flowbite-svelte';
   	import { BellSolid, EyeSolid } from 'flowbite-svelte-icons';
-
+	import {eventSourceListener} from '../service/blockchains/stellar'
 	export let address: string;
 
 	let saldo = 0;
