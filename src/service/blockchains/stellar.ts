@@ -108,3 +108,22 @@ export async function paymentsdones() {
   }
   
   paymentsdones();
+
+  export async function eventSourceListener(
+	account: string,
+	cb: Function,
+	errCb: Function,
+) {
+	var es = new EventSource(
+		`https://horizon-testnet.stellar.org/accounts/${account}/payments`,
+	);
+
+	console.info('me levantoi OK el event source', es);
+	es.onmessage = function (message) {
+		cb(message);
+	};
+
+	es.onerror = function (error) {
+		errCb(error);
+	};
+}
