@@ -1,11 +1,19 @@
 <script lang="ts">
 	import Wallet from './lib/Wallet.svelte';
-	import WalletQR from './lib/WalletQR.svelte';
-	import { Card, Heading, Hr, Span } from 'flowbite-svelte';
-	import { stellarAccount1 } from './stellar_account';
+	import {
+		Alert,
+		Card,
+		Heading,
+		Hr,
+		Input,
+		Label,
+		Span,
+	} from 'flowbite-svelte';
 
 	// cargar pubKey de stellar
-	const addr = stellarAccount1.pubKey;
+	let addr: string = '';
+
+	let priv: string = '';
 </script>
 
 <main class="flex flex-col max-w-max m-auto p-10">
@@ -30,6 +38,20 @@
 	</p>
 
 	<div class="flex flex-col gap-8 my-10">
+		<div class="bg-slate-300">
+			<Label>Pub key</Label>
+			<Input bind:value={addr} />
+
+			<Label>Priv key</Label>
+			<Input bind:value={priv} />
+
+			{#if !addr || !priv}
+				<Alert color="red">
+					Deberá completar su clavr public y privada
+				</Alert>
+			{/if}
+		</div>
+
 		<Card
 			padding="xl"
 			size="md"
