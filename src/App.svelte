@@ -1,12 +1,8 @@
 <script lang="ts">
-	import svelteLogo from './assets/svelte.svg';
-	import viteLogo from '/vite.svg';
 	import Wallet from './lib/Wallet.svelte';
+	import WalletQR from './lib/WalletQR.svelte';
 	import { Card, Heading, Hr, Span } from 'flowbite-svelte';
-	import WalletQr from './lib/WalletQR.svelte';
 	import { stellarAccount1 } from './stellar_account';
-	import WalletSaldoHistory from './lib/WalletSaldoHistory.svelte';
-	import InputPagar from './lib/InputPagar.svelte';
 
 	// cargar pubKey de stellar
 	const addr = stellarAccount1.pubKey;
@@ -41,7 +37,5 @@
 		>
 			<Wallet address={addr} />
 		</Card>
-
-		
 	</div>
 </main>

@@ -101,6 +101,7 @@ export async function createPayment(
 	}
 }
 
+// TODO agregar parametro a la funcion con la stellar account asi no se hardcodea en el codigo la pubkey
 export async function paymentsdones() {
 	const payments = await server.payments().forAccount("GDNHIOSGUNBCZ7PNU7TLE4MPMUUHNDECZ7534MNI2BHRGLDIXDQTL3PG").call();
   
