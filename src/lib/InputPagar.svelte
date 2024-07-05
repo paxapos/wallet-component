@@ -44,9 +44,9 @@
 </script>
 
 <div
-	class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50"
+	class=" items-center bg-white-900 "
 >
-	<div class="bg-blue-200 p-6 rounded-lg shadow-lg w-80">
+	<div class="bg-white-200 p-6 rounded-lg w-80">
 		<h2 class="text-black text-2xl font-bold mb-4">Enviar Transacción Stellar</h2>
 		<div class="mb-4">
 			<label for="amount" class="block text-gray-700 mb-2">Monto</label>
@@ -54,7 +54,7 @@
 				type="number"
 				bind:value={amount}
 				placeholder="Ingrese el monto a pagar"
-				class="border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500"
+				class="border border-gray-300 rounded-md focus:ring-black-500 focus:ring-black-500 focus:border-black-500"
 			/>
 		</div>
 
@@ -62,10 +62,11 @@
 			<label for="amount" class="block text-gray-700 mb-2">Activo</label>
 			<Select 
 				placeholder="Opciones"
-				class="mt-2"
+				class="mt-2  border-gray-300 rounded-md focus:ring-black-500  focus:border-black-500"
 				items={monedasDisponibles}
 				bind:value={monedaSeleccionada}
-			/>
+				
+			/>	
 		</div>
 
 		<div class="mb-4">
@@ -76,7 +77,7 @@
 				type="text"
 				id="recipient"
 				bind:value={recipient}
-				class="w-full px-3 py-2 border"
+				class="w-full px-3 py-2 border bg-gray-100 rounded-md"
 			/>
 		</div>
 		<div class=" items-center justify-center space-x-4">
