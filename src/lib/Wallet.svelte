@@ -72,14 +72,14 @@
 </script>
 
 <Modal bind:open={openModalQR} autoclose>
-	<div class="m-auto">
-		<WalletQR value={stellarAccount1.pubKey} size="1800" />
+	<div class="m-auto flex justify-center ">
+		<WalletQR value={stellarAccount1.pubKey} size="500" />
 	</div>
 </Modal>
 
 <Modal bind:open={openModalPagar} autoclose>
-	<div class="m-auto text-center flex justify-center align-middle">
-		<InputPagar
+	<div class="text-center flex justify-center align-middle ">
+		<InputPagar 
 			stellarAccount={stellarAccount1}
 			on:paymentDone={manejarPagoRealizado}
 		/>
@@ -101,7 +101,7 @@
 
 	<h1 class="text-gray-800 text-3xl sixa-max">{saldoFormateado}</h1>
 	<ButtonGroup>
-		<Button outline color="blue" on:click={generarQr}>
+		<Button outline color="light" on:click={generarQr}>
 			Generar QR
 			<svg
 				class="w-6 h-6 text-gray-800 dark:text-white"
@@ -126,7 +126,7 @@
 				/>
 			</svg>
 		</Button>
-		<Button outline color="blue" on:click={pagar}>
+		<Button outline color="light" on:click={pagar}>
 			Pagar
 			<svg
 				class="w-6 h-6 text-gray-800 dark:text-white"
@@ -149,7 +149,7 @@
 	</ButtonGroup>
 	<div
 		id="bell"
-		class=" inline-flex items-center text-sm font-medium text-center text-black hover:text-blue-800 focus:outline-none dark:hover:text-white dark:text-dark"
+		class="inline-flex items-center text-sm font-medium text-center text-black hover:text-gray-500 focus:outline-none dark:hover:text-white dark:text-dark"
 	>
 		<BellSolid class="w-8 h-8" />
 		<div class="flex relative">
@@ -158,69 +158,68 @@
 			/>
 		</div>
 	</div>
-	<Dropdown
-		triggeredBy="#bell"
-		class="w-full max-w-sm rounded divide-y divide-dark-100 shadow dark:bg-black dark:divide-black"
-	>
-		<div slot="header" class="bg-blue-200 text-center py-2 font-bold">
-			Notifications
-		</div>
-		<DropdownItem class="flex space-x-4 rtl:space-x-reverse">
-			<Avatar
-				src="/images/profile-picture-1.webp"
-				dot={{ color: 'bg-dark' }}
-				rounded
-			/>
-			<div class="ps-3 w-full">
-				<div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">
-					Nueva trasferencia de <span
-						class="font-semibold text-gray-900 dark:text-white"
-						>Jese Leos</span
-					>
-					: Ha trasferido $500
-				</div>
-				<div class="text-xs text-primary-600 dark:text-primary-500">
-					a few moments ago
-				</div>
+		<Dropdown 
+			triggeredBy="#bell"
+			class="w-full max-w-sm rounded divide-y divide-dark-100 shadow dark:bg-black dark:divide-black">
+			<div slot="header" class="bg-primary-500 text-center py-2 font-bold">
+				<h1 class="text-gray-700">Actividad</h1>
 			</div>
-		</DropdownItem>
-		<DropdownItem class="flex space-x-4 rtl:space-x-reverse">
-			<Avatar
-				src="/images/profile-picture-1.webp"
-				dot={{ color: 'bg-dark' }}
-				rounded
-			/>
-			<div class="ps-3 w-full">
-				<div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">
-					Nueva trasferencia de <span
-						class="font-semibold text-gray-900 dark:text-white"
-						>Jese Leos</span
-					>
-					: Ha trasferido $500
+			<DropdownItem class="flex space-x-4 rtl:space-x-reverse">
+				<Avatar
+					src="/images/profile-picture-1.webp"
+					dot={{ color: 'bg-dark' }}
+					rounded
+				/>
+				<div class="ps-3 w-full">
+					<div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">
+						Nueva trasferencia de <span
+							class="font-semibold text-gray-900 dark:text-white"
+							>Jese Leos</span
+						>
+						: Ha trasferido $500
+					</div>
+					<div class="text-xs text-primary-600 dark:text-primary-500">
+						a few moments ago
+					</div>
 				</div>
-				<div class="text-xs text-primary-600 dark:text-primary-500">
-					a few moments ago
+			</DropdownItem>
+			<DropdownItem class="flex space-x-4 rtl:space-x-reverse">
+				<Avatar
+					src="/images/profile-picture-1.webp"
+					dot={{ color: 'bg-dark' }}
+					rounded
+				/>
+				<div class="ps-3 w-full">
+					<div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">
+						Nueva trasferencia de <span
+							class="font-semibold text-gray-900 dark:text-white"
+							>Jese Leos</span
+						>
+						: Ha trasferido $500
+					</div>
+					<div class="text-xs text-primary-600 dark:text-primary-500">
+						a few moments ago
+					</div>
 				</div>
-			</div>
-		</DropdownItem>
-		<DropdownItem class="flex space-x-4 rtl:space-x-reverse">
-			<Avatar
-				src="/images/profile-picture-1.webp"
-				dot={{ color: 'bg-dark' }}
-				rounded
-			/>
-			<div class="ps-3 w-full">
-				<div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">
-					Nueva trasferencia de <span
-						class="font-semibold text-gray-900 dark:text-white"
-						>Jese Leos</span
-					>
-					: Ha trasferido $500
+			</DropdownItem>
+			<DropdownItem class="flex space-x-4 rtl:space-x-reverse">
+				<Avatar
+					src="/images/profile-picture-1.webp"
+					dot={{ color: 'bg-dark' }}
+					rounded
+				/>
+				<div class="ps-3 w-full">
+					<div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">
+						Nueva trasferencia de <span
+							class="font-semibold text-gray-900 dark:text-white"
+							>Jese Leos</span
+						>
+						: Ha trasferido $500
+					</div>
+					<div class="text-xs text-primary-600 dark:text-primary-500">
+						a few moments ago
+					</div>
 				</div>
-				<div class="text-xs text-primary-600 dark:text-primary-500">
-					a few moments ago
-				</div>
-			</div>
-		</DropdownItem>
-	</Dropdown>
+			</DropdownItem>
+		</Dropdown>	
 </div>
