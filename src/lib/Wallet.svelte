@@ -78,7 +78,7 @@
 </Modal>
 
 <Modal bind:open={openModalPagar} autoclose>
-	<div class="text-center flex justify-center align-middle ">
+	<div class="text-center justify-center align-middle ">
 		<InputPagar 
 			stellarAccount={stellarAccount1}
 			on:paymentDone={manejarPagoRealizado}
