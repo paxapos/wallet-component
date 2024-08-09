@@ -55,7 +55,7 @@
 		<Card
 			padding="xl"
 			size="md"
-			class="border-blue-900  items-center  bg-blue-400 m-auto"
+			class="rounded-3xl border-gray-200 items-center  bg-gray-400 m-auto"
 		>
 			<Wallet address={addr} />
 		</Card>
