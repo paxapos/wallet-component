@@ -11,39 +11,23 @@
 	} from 'flowbite-svelte';
 	import { BellSolid, EyeSolid } from 'flowbite-svelte-icons';
 	import { eventSourceListener } from '../service/blockchains/stellar';
+	import {horizonEventSource} from '../service/blockchains/stellar'
 	export let address: string;
 
 	let saldo = 0;
-
-	getBalance(address).then((res) => {
-		saldo = res;
-	});
-
-	eventSourceListener(
-		address,
-		async (res: any) => {
-			console.info('me llego un mensaje', res);
-			saldo = await getBalance(address);
-		},
-		(msgError: any) => {
-			console.error('me paso algo malisimo', msgError);
-		},
-	);
-
 	let saldoFormateado = '';
-
-	console.info('Wallet component loaded address: ', address);
-
 	$: if (saldo > 0) {
 		const formateador = new Intl.NumberFormat('es-AR', {
 			style: 'currency',
 			currency: 'ARS',
 			minimumFractionDigits: 2, // Cantidad mínima de decimales
 			maximumFractionDigits: 2, // Cantidad máxima de decimales
+			
 		});
-
-		saldoFormateado = formateador.format(saldo);
-	} else {
+	saldoFormateado = formateador.format(saldo);
+		
+	}
+	$: if (saldo==0) {
 		saldoFormateado = 'Sin saldo';
 	}
 
@@ -56,6 +40,30 @@
 	function pagar() {
 		openModalPagar = true;
 	}
+	getBalance(address).then((res) => {
+		saldo = res;
+	});
+
+	$: if (address.length==56){eventSourceListener(
+		address,
+		async (res: any) => {
+			console.info('me llego un mensaje', res);
+			saldo = await getBalance(address);
+		},
+		(msgError: any) => {
+			console.error('me paso algo malisimo', msgError);
+
+		},
+	);
+	}
+	$: if (address.length!==56){
+            horizonEventSource?.close();
+            console.log(saldo)
+			saldo=0
+}
+	console.info('Wallet component loaded address: ', address);
+
+
 
 	import { stellarAccount2, stellarAccount1 } from '../stellar_account';
 
@@ -100,8 +108,8 @@
 	{/if}
 
 	<h1 class="text-gray-800 text-3xl sixa-max">{saldoFormateado}</h1>
-	<ButtonGroup>
-		<Button outline color="light" on:click={generarQr}>
+	<ButtonGroup >
+		<Button class="bg-gray-300" outline color="light" on:click={generarQr}>
 			Generar QR
 			<svg
 				class="w-6 h-6 text-gray-800 dark:text-white"
@@ -126,7 +134,7 @@
 				/>
 			</svg>
 		</Button>
-		<Button outline color="light" on:click={pagar}>
+		<Button   class="bg-gray-300" outline color="light" on:click={pagar}>
 			Pagar
 			<svg
 				class="w-6 h-6 text-gray-800 dark:text-white"
@@ -161,8 +169,8 @@
 		<Dropdown 
 			triggeredBy="#bell"
 			class="w-full max-w-sm rounded divide-y divide-dark-100 shadow dark:bg-black dark:divide-black">
-			<div slot="header" class="bg-primary-500 text-center py-2 font-bold">
-				<h1 class="text-gray-700">Actividad</h1>
+			<div slot="header" class="bg-gray-400 text-center py-2 font-bold">
+				<h1 class="text-dark">Actividad</h1>
 			</div>
 			<DropdownItem class="flex space-x-4 rtl:space-x-reverse">
 				<Avatar
