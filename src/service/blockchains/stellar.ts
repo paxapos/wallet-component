@@ -12,26 +12,24 @@ const server = new StellarSdk.Horizon.Server(stellarNetwork);
  *
  */
 const network = Networks.TESTNET;
-/*
+export let horizonEventSource: EventSource | null = null
 export async function eventSourceListener(
 	account: string,
 	cb: Function,
 	errCb: Function,
 ) {
-	var es = new EventSource(
-		`https://horizon-testnet.stellar.org/accounts/${account}/payments`,
-	);
-
-	console.info('me levantoi OK el event source', es);
-	es.onmessage = function (message) {
+		horizonEventSource = new EventSource(
+			`https://horizon-testnet.stellar.org/accounts/${account}/payments`,
+		);
+	console.info('me levantoi OK el event source', horizonEventSource);
+	horizonEventSource.onmessage = function (message) {
 		cb(message);
 	};
 
-	es.onerror = function (error) {
+	horizonEventSource.onerror = function (error) {
 		errCb(error);
 	};
 }
-*/
 export async function getBalance(
 	addr: string,
 	assetCode: AssetCodes = AssetCodes.XLM,
@@ -42,9 +40,8 @@ export async function getBalance(
 
 	const accountResult = await server.accounts().accountId(accountId).call();
 
-	console.log('Balances for account: ' + accountId);
 	const balanceNativo = accountResult.balances.filter((balance) => {
-		console.log('Type:', balance.asset_type, ', Balance:', balance.balance);
+//		console.log('Type:', balance.asset_type, ', Balance:', balance.balance)
 
 		return balance.asset_type == 'native';
 		//return balance.asset_code === assetCode;
@@ -104,27 +101,8 @@ export async function createPayment(
 // TODO agregar parametro a la funcion con la stellar account asi no se hardcodea en el codigo la pubkey
 export async function paymentsdones() {
 	const payments = await server.payments().forAccount("GDNHIOSGUNBCZ7PNU7TLE4MPMUUHNDECZ7534MNI2BHRGLDIXDQTL3PG").call();
-  
+
 	console.log(payments);
-  }
-  
-  paymentsdones();
-
-  export async function eventSourceListener(
-	account: string,
-	cb: Function,
-	errCb: Function,
-) {
-	var es = new EventSource(
-		`https://horizon-testnet.stellar.org/accounts/${account}/payments`,
-	);
-
-	console.info('me levantoi OK el event source', es);
-	es.onmessage = function (message) {
-		cb(message);
-	};
-
-	es.onerror = function (error) {
-		errCb(error);
-	};
 }
+
+paymentsdones();
