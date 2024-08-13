@@ -57,7 +57,7 @@
 			size="md"
 			class="rounded-3xl border-gray-200 items-center  bg-gray-400 m-auto"
 		>
-			<Wallet address={addr} />
+			<Wallet address={addr} pasword={priv} />
 		</Card>
 	</div>
 </main>
