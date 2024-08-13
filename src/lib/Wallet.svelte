@@ -12,7 +12,9 @@
 	import { BellSolid, EyeSolid } from 'flowbite-svelte-icons';
 	import { eventSourceListener } from '../service/blockchains/stellar';
 	import {horizonEventSource} from '../service/blockchains/stellar'
+	import {paymentsdones} from '../service/blockchains/stellar'
 	export let address: string;
+	export let pasword: string;
 
 	let saldo = 0;
 	let saldoFormateado = '';
@@ -44,7 +46,8 @@
 		saldo = res;
 	});
 
-	$: if (address.length==56){eventSourceListener(
+	$: if (address.length==56){
+		eventSourceListener(
 		address,
 		async (res: any) => {
 			console.info('me llego un mensaje', res);
@@ -61,11 +64,6 @@
             console.log(saldo)
 			saldo=0
 }
-	console.info('Wallet component loaded address: ', address);
-
-
-
-	import { stellarAccount2, stellarAccount1 } from '../stellar_account';
 
 	/*De esta manera se ejecutaria una transacción en la testnet de stellar*/
 	import InputPagar from './InputPagar.svelte';
@@ -81,14 +79,17 @@
 
 <Modal bind:open={openModalQR} autoclose>
 	<div class="m-auto flex justify-center ">
-		<WalletQR value={stellarAccount1.pubKey} size="500" />
+		<WalletQR value={address} size="500" />
 	</div>
 </Modal>
 
 <Modal bind:open={openModalPagar} autoclose>
 	<div class="text-center justify-center align-middle ">
 		<InputPagar 
-			stellarAccount={stellarAccount1}
+			stellarAccount={{
+				"pubKey": address,
+				"privKey": pasword,
+			}}
 			on:paymentDone={manejarPagoRealizado}
 		/>
 	</div>
