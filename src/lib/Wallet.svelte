@@ -2,6 +2,7 @@
 	import { ButtonGroup, Button, Modal, Input } from 'flowbite-svelte';
 	import { getBalance } from '../service/blockchains/stellar';
 	import WalletQR from './WalletQR.svelte';
+	import WalletSaldoHistory from './WalletSaldoHistory.svelte';
 
 	import {
 		Dropdown,
@@ -38,6 +39,11 @@
 	let openModalQR = false;
 	function generarQr() {
 		openModalQR = true;
+	}
+
+	let openModalWalletSaldoHistory= false;
+	function WalletSaldo() {
+		openModalWalletSaldoHistory = true;
 	}
 
 	let openModalPagar = false;
@@ -92,6 +98,12 @@ const dispatcher = createEventDispatcher();
 <Modal bind:open={openModalQR} autoclose>
 	<div class="m-auto flex justify-center ">
 		<WalletQR value={address} size="500" />
+	</div>
+</Modal>
+
+<Modal bind:open={openModalWalletSaldoHistory} autoclose>
+	<div class="m-auto flex justify-center ">
+		<WalletSaldoHistory />
 	</div>
 </Modal>
 
@@ -167,80 +179,12 @@ const dispatcher = createEventDispatcher();
 				/>
 			</svg>
 		</Button>
+		<Button   class="bg-gray-200" outline color="light" on:click={WalletSaldo}>
+			<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+				<path d="M17.133 12.632v-1.8a5.406 5.406 0 0 0-4.154-5.262.955.955 0 0 0 .021-.106V3.1a1 1 0 0 0-2 0v2.364a.955.955 0 0 0 .021.106 5.406 5.406 0 0 0-4.154 5.262v1.8C6.867 15.018 5 15.614 5 16.807 5 17.4 5 18 5.538 18h12.924C19 18 19 17.4 19 16.807c0-1.193-1.867-1.789-1.867-4.175ZM8.823 19a3.453 3.453 0 0 0 6.354 0H8.823Z"/>
+			  </svg>
+			  
+		</Button>
 	</ButtonGroup>
-	<div
-		id="bell"
-		class="inline-flex items-center text-sm font-medium text-center text-black hover:text-gray-500 focus:outline-none dark:hover:text-white dark:text-dark"
-	>
-		<BellSolid class="w-8 h-8" />
-		<div class="flex relative">
-			<div
-				class="inline-flex relative -top-2 end-4 w-3 h-3 bg-red-700 rounded-full border-2 border-white dark:border-gray-800"
-			/>
-		</div>
-	</div>
-		<Dropdown 
-			triggeredBy="#bell"
-			class="w-full max-w-sm rounded divide-y divide-dark-100 shadow dark:bg-black dark:divide-black">
-			<div slot="header" class="bg-gray-400 text-center py-2 font-bold">
-				<h1 class="text-dark">Actividad</h1>
-			</div>
-			<DropdownItem class="flex space-x-4 rtl:space-x-reverse">
-				<Avatar
-					src="/images/profile-picture-1.webp"
-					dot={{ color: 'bg-dark' }}
-					rounded
-				/>
-				<div class="ps-3 w-full">
-					<div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">
-						Nueva trasferencia de <span
-							class="font-semibold text-gray-900 dark:text-white"
-							>Jese Leos</span
-						>
-						: Ha trasferido $500
-					</div>
-					<div class="text-xs text-primary-600 dark:text-primary-500">
-						a few moments ago
-					</div>
-				</div>
-			</DropdownItem>
-			<DropdownItem class="flex space-x-4 rtl:space-x-reverse">
-				<Avatar
-					src="/images/profile-picture-1.webp"
-					dot={{ color: 'bg-dark' }}
-					rounded
-				/>
-				<div class="ps-3 w-full">
-					<div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">
-						Nueva trasferencia de <span
-							class="font-semibold text-gray-900 dark:text-white"
-							>Jese Leos</span
-						>
-						: Ha trasferido $500
-					</div>
-					<div class="text-xs text-primary-600 dark:text-primary-500">
-						a few moments ago
-					</div>
-				</div>
-			</DropdownItem>
-			<DropdownItem class="flex space-x-4 rtl:space-x-reverse">
-				<Avatar
-					src="/images/profile-picture-1.webp"
-					dot={{ color: 'bg-dark' }}
-					rounded
-				/>
-				<div class="ps-3 w-full">
-					<div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">
-						Nueva trasferencia de <span
-							class="font-semibold text-gray-900 dark:text-white"
-							>Jese Leos</span
-						>
-						: Ha trasferido $500
-					</div>
-					<div class="text-xs text-primary-600 dark:text-primary-500">
-						a few moments ago
-					</div>
-				</div>
-			</DropdownItem>
-		</Dropdown>	
+	
 </div>
