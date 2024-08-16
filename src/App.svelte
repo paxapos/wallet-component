@@ -39,10 +39,10 @@
 
 	<div class="flex flex-col gap-8 my-10">
 		<div >
-			<Label>Pub key</Label>
+			<Label class="text-black text-xl font-bold " >Pub key</Label>
 			<Input class="bg-slate-300" bind:value={addr} />
 
-			<Label>Priv key</Label>
+			<Label class="text-black text-xl font-bold ">Priv key</Label>
 			<Input class="bg-slate-300" bind:value={priv} />
 
 			{#if !addr || !priv}
