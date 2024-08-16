@@ -13,6 +13,8 @@
 	import { eventSourceListener } from '../service/blockchains/stellar';
 	import {horizonEventSource} from '../service/blockchains/stellar'
 	import {paymentsdones} from '../service/blockchains/stellar'
+	import {paymentRealized} from '../service/blockchains/stellar'
+	import { createEventDispatcher } from 'svelte';
 	export let address: string;
 	export let pasword: string;
 
@@ -64,6 +66,16 @@
             console.log(saldo)
 			saldo=0
 }
+const dispatcher = createEventDispatcher();
+	$: if (paymentRealized) {
+		
+		dispatcher('paymentDone', paymentDone);
+		getBalance(address).then((res) => {
+		saldo = res;
+	});
+
+	}
+
 
 	/*De esta manera se ejecutaria una transacción en la testnet de stellar*/
 	import InputPagar from './InputPagar.svelte';
