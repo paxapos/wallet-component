@@ -60,6 +60,10 @@ export async function getBalance(
  * @param beneficiary el string de la clave public
  * @param assetCode el codigo del activo que se quiere enviar
  */
+
+export let paymentDone: PaymentDone
+
+export let paymentRealized:boolean
 export async function createPayment(
 	monto: number,
 	payer: User,
@@ -79,9 +83,6 @@ export async function createPayment(
 			Operation.payment({
 				destination: beneficiary,
 				amount: String(monto),
-				//en esta linea esta el problema de que monto si o si se tiene que ingresar como un string
-				//a su vez monto es la cantidad de dinero que se quiere enviar a una cuenta en una transaccion
-				//por lo que tendria que ingresarse como un entero
 				asset: Asset.native(),
 			}),
 		);
@@ -93,8 +94,14 @@ export async function createPayment(
 		pruebaArmada.sign(sourceKeys);
 		const pruebaTerminada = await server.submitTransaction(pruebaArmada);
 		console.log(pruebaTerminada);
+		paymentRealized=true
+		paymentDone ={
+			amount:monto,
+			destination: beneficiary,
+		};
 	} catch (err) {
 		console.log('No se pudo completar la transacción');
+		paymentRealized=false
 	}
 }
 
