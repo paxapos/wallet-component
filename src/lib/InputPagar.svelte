@@ -34,12 +34,6 @@
 		console.log(`Amount: ${amount}, Recipient: ${recipient}`);
 
 		const seEnvio = await createPayment(amount, stellarAccount, recipient);
-
-		const paymentDone: PaymentDone = {
-			amount,
-			destination: recipient,
-		};
-		dispatcher('paymentDone', paymentDone);
 	}
 </script>
 
