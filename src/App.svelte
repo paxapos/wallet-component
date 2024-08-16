@@ -38,12 +38,12 @@
 	</p>
 
 	<div class="flex flex-col gap-8 my-10">
-		<div class="bg-slate-300">
+		<div >
 			<Label>Pub key</Label>
-			<Input bind:value={addr} />
+			<Input class="bg-slate-300" bind:value={addr} />
 
 			<Label>Priv key</Label>
-			<Input bind:value={priv} />
+			<Input class="bg-slate-300" bind:value={priv} />
 
 			{#if !addr || !priv}
 				<Alert color="red">
