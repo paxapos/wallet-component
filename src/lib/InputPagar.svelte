@@ -40,7 +40,7 @@
 <div
 	class=" items-center bg-white-900 "
 >
-	<div class="bg-white-200 p-6 rounded-lg w-80">
+	<div class="bg-white-200 p-6 rounded-lg ">
 		<h2 class="text-black text-2xl font-bold mb-4">Enviar Transacción Stellar</h2>
 		<div class="mb-4">
 			<label for="amount" class="block text-gray-700 mb-2">Monto</label>
