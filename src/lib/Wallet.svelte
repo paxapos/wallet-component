@@ -12,9 +12,9 @@
 	} from 'flowbite-svelte';
 	import { BellSolid, EyeSolid } from 'flowbite-svelte-icons';
 	import { eventSourceListener } from '../service/blockchains/stellar';
-	import {horizonEventSource} from '../service/blockchains/stellar'
-	import {paymentsdones} from '../service/blockchains/stellar'
-	import {paymentRealized} from '../service/blockchains/stellar'
+	import { horizonEventSource } from '../service/blockchains/stellar';
+	import { paymentsdones } from '../service/blockchains/stellar';
+	import { paymentRealized } from '../service/blockchains/stellar';
 	import { createEventDispatcher } from 'svelte';
 	export let address: string;
 	export let pasword: string;
@@ -27,12 +27,10 @@
 			currency: 'ARS',
 			minimumFractionDigits: 2, // Cantidad mínima de decimales
 			maximumFractionDigits: 2, // Cantidad máxima de decimales
-			
 		});
-	saldoFormateado = formateador.format(saldo);
-		
+		saldoFormateado = formateador.format(saldo);
 	}
-	$: if (saldo==0) {
+	$: if (saldo == 0) {
 		saldoFormateado = 'Sin saldo';
 	}
 
@@ -41,7 +39,7 @@
 		openModalQR = true;
 	}
 
-	let openModalWalletSaldoHistory= false;
+	let openModalWalletSaldoHistory = false;
 	function WalletSaldo() {
 		openModalWalletSaldoHistory = true;
 	}
@@ -54,34 +52,30 @@
 		saldo = res;
 	});
 
-	$: if (address.length==56){
+	$: if (address.length == 56) {
 		eventSourceListener(
-		address,
-		async (res: any) => {
-			console.info('me llego un mensaje', res);
-			saldo = await getBalance(address);
-		},
-		(msgError: any) => {
-			console.error('me paso algo malisimo', msgError);
-
-		},
-	);
+			address,
+			async (res: any) => {
+				console.info('me llego un mensaje', res);
+				saldo = await getBalance(address);
+			},
+			(msgError: any) => {
+				console.error('me paso algo malisimo', msgError);
+			},
+		);
 	}
-	$: if (address.length!==56){
-            horizonEventSource?.close();
-            console.log(saldo)
-			saldo=0
-}
-const dispatcher = createEventDispatcher();
+	$: if (address.length !== 56) {
+		horizonEventSource?.close();
+		console.log(saldo);
+		saldo = 0;
+	}
+	const dispatcher = createEventDispatcher();
 	$: if (paymentRealized) {
-		
 		dispatcher('paymentDone', paymentDone);
 		getBalance(address).then((res) => {
-		saldo = res;
-	});
-
+			saldo = res;
+		});
 	}
-
 
 	/*De esta manera se ejecutaria una transacción en la testnet de stellar*/
 	import InputPagar from './InputPagar.svelte';
@@ -91,28 +85,31 @@ const dispatcher = createEventDispatcher();
 
 	function manejarPagoRealizado(event: CustomEvent<PaymentDone>) {
 		paymentDone = event.detail;
+		setTimeout(() => {
+			paymentDone = null;
+		}, 5000);
 		openModalPagar = false;
 	}
 </script>
 
 <Modal bind:open={openModalQR} autoclose>
-	<div class="m-auto flex justify-center ">
+	<div class="m-auto flex justify-center">
 		<WalletQR value={address} size="500" />
 	</div>
 </Modal>
 
 <Modal bind:open={openModalWalletSaldoHistory} autoclose>
-	<div class="m-auto flex justify-center ">
+	<div class="m-auto flex justify-center">
 		<WalletSaldoHistory />
 	</div>
 </Modal>
 
 <Modal bind:open={openModalPagar} autoclose>
-	<div class="text-center justify-center align-middle ">
-		<InputPagar 
+	<div class="text-center justify-center align-middle">
+		<InputPagar
 			stellarAccount={{
-				"pubKey": address,
-				"privKey": pasword,
+				pubKey: address,
+				privKey: pasword,
 			}}
 			on:paymentDone={manejarPagoRealizado}
 		/>
@@ -133,8 +130,14 @@ const dispatcher = createEventDispatcher();
 	{/if}
 
 	<h1 class="text-gray-800 text-3xl sixa-max">{saldoFormateado}</h1>
-	<ButtonGroup >
-		<Button class="bg-gray-300" outline color="light" on:click={generarQr}>
+	<ButtonGroup>
+		<Button
+			class="bg-gray-300"
+			outline
+			color="light"
+			on:click={generarQr}
+			disabled={address.length != 56}
+		>
 			Generar QR
 			<svg
 				class="w-6 h-6 text-gray-800 dark:text-white"
@@ -159,7 +162,7 @@ const dispatcher = createEventDispatcher();
 				/>
 			</svg>
 		</Button>
-		<Button   class="bg-gray-300" outline color="light" on:click={pagar}>
+		<Button class="bg-gray-300" outline color="light" on:click={pagar}>
 			Pagar
 			<svg
 				class="w-6 h-6 text-gray-800 dark:text-white"
@@ -179,12 +182,25 @@ const dispatcher = createEventDispatcher();
 				/>
 			</svg>
 		</Button>
-		<Button   class="bg-gray-200" outline color="light" on:click={WalletSaldo}>
-			<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-				<path d="M17.133 12.632v-1.8a5.406 5.406 0 0 0-4.154-5.262.955.955 0 0 0 .021-.106V3.1a1 1 0 0 0-2 0v2.364a.955.955 0 0 0 .021.106 5.406 5.406 0 0 0-4.154 5.262v1.8C6.867 15.018 5 15.614 5 16.807 5 17.4 5 18 5.538 18h12.924C19 18 19 17.4 19 16.807c0-1.193-1.867-1.789-1.867-4.175ZM8.823 19a3.453 3.453 0 0 0 6.354 0H8.823Z"/>
-			  </svg>
-			  
+		<Button
+			class="bg-gray-200"
+			outline
+			color="light"
+			on:click={WalletSaldo}
+		>
+			<svg
+				class="w-6 h-6 text-gray-800 dark:text-white"
+				aria-hidden="true"
+				xmlns="http://www.w3.org/2000/svg"
+				width="24"
+				height="24"
+				fill="currentColor"
+				viewBox="0 0 24 24"
+			>
+				<path
+					d="M17.133 12.632v-1.8a5.406 5.406 0 0 0-4.154-5.262.955.955 0 0 0 .021-.106V3.1a1 1 0 0 0-2 0v2.364a.955.955 0 0 0 .021.106 5.406 5.406 0 0 0-4.154 5.262v1.8C6.867 15.018 5 15.614 5 16.807 5 17.4 5 18 5.538 18h12.924C19 18 19 17.4 19 16.807c0-1.193-1.867-1.789-1.867-4.175ZM8.823 19a3.453 3.453 0 0 0 6.354 0H8.823Z"
+				/>
+			</svg>
 		</Button>
 	</ButtonGroup>
-	
 </div>

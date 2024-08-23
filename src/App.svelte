@@ -11,9 +11,19 @@
 	} from 'flowbite-svelte';
 
 	// cargar pubKey de stellar
-	let addr: string = '';
+	let addr: string = localStorage.getItem('addr') || '';
 
-	let priv: string = '';
+	let priv: string = localStorage.getItem('priv') || '';
+
+	function storeAddr(event: any) {
+		addr = event.target.value;
+		localStorage.setItem('addr', addr);
+	}
+
+	function storePriv(event: any) {
+		priv = event.target.value;
+		localStorage.setItem('priv', priv);
+	}
 </script>
 
 <main class="flex flex-col max-w-max m-auto p-10">
@@ -38,12 +48,20 @@
 	</p>
 
 	<div class="flex flex-col gap-8 my-10">
-		<div >
-			<Label class="text-black text-xl font-bold " >Pub key</Label>
-			<Input class="bg-slate-300" bind:value={addr} />
+		<div>
+			<Label class="text-black text-xl font-bold ">Pub key</Label>
+			<Input
+				class="bg-slate-300"
+				bind:value={addr}
+				on:change={storeAddr}
+			/>
 
 			<Label class="text-black text-xl font-bold ">Priv key</Label>
-			<Input class="bg-slate-300" bind:value={priv} />
+			<Input
+				class="bg-slate-300"
+				bind:value={priv}
+				on:change={storePriv}
+			/>
 
 			{#if !addr || !priv}
 				<Alert color="red">
