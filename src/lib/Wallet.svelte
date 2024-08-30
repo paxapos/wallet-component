@@ -184,7 +184,7 @@
 			</svg>
 		</Button >
 		<Button
-			class="bg-gray-200"
+			class="bg-gray-300"
 			outline
 			color="light"
 			on:click={WalletSaldo}
