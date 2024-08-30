@@ -73,7 +73,7 @@
 		<Card
 			padding="xl"
 			size="md"
-			class="rounded-3xl border-gray-200 items-center  bg-gray-400 m-auto"
+			class="rounded-3xl border-gray-300 items-center  bg-gray-400 m-auto"
 		>
 			<Wallet address={addr} pasword={priv} />
 		</Card>
