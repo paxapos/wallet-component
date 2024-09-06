@@ -82,14 +82,14 @@
 		</div>
 		<div class=" items-center justify-center space-x-4">
 			<button
-				class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-600"
+				class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
 				on:click={() => {
 					amount = 0;
 					recipient = '';
 				}}>Cancelar</button
 			>
 			<button
-				class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-600"
+				class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
 				on:click={submitForm}>Enviar</button
 			>
 		</div>
