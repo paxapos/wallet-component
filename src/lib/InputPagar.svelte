@@ -54,7 +54,7 @@
 				type="number"
 				bind:value={amount}
 				placeholder="Ingrese el monto a pagar"
-				class="border border-gray-300 rounded-md focus:ring-black-500 focus:ring-black-500 focus:border-black-500"
+				class="border border-gray-400 rounded-md focus:ring-black-500 focus:ring-black-500 focus:border-black-500"
 			/>
 		</div>
 
@@ -62,7 +62,7 @@
 			<label for="amount" class="block text-gray-700 mb-2">Activo</label>
 			<Select 
 				placeholder="Opciones"
-				class="mt-2  border-gray-300 rounded-md focus:ring-black-500  focus:border-black-500"
+				class="mt-2  border-gray-400 rounded-md focus:ring-black-500  focus:border-black-500"
 				items={monedasDisponibles}
 				bind:value={monedaSeleccionada}
 				
@@ -77,7 +77,7 @@
 				type="text"
 				id="recipient"
 				bind:value={recipient}
-				class="w-full px-3 py-2 border bg-gray-100 rounded-md"
+				class="w-full border-gray-400 px-3 py-2 border bg-gray-100 rounded-md"
 			/>
 		</div>
 		<div class=" items-center justify-center space-x-4">
