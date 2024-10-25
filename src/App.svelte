@@ -10,6 +10,40 @@
 		Span,
 	} from 'flowbite-svelte';
 
+	//PROBANDO WALLET KIT
+	//npm i @reown/walletkit @walletconnect/utils @walletconnect/core
+
+	import { Core } from '@walletconnect/core'
+	import { WalletKit } from '@reown/walletkit'
+
+	const core = new Core({
+	projectId: '718db8dd3bdd8a270d49ea62522c0805'
+	})
+
+	const metadata = {
+	name: 'Wallet Paxapos',
+	description: 'AppKit Example',
+	url: 'http://localhost:5173/', // origin must match your domain & subdomain
+	icons: ['https://assets.reown.com/reown-profile-pic.png']
+	}
+
+	const walletKit = WalletKit.init({
+	core, // <- pass the shared 'core' instance
+	metadata
+	})
+
+
+
+	async function connectWallet() {
+    try {
+        const session = await walletKit;
+        console.log('Conectado:', session);
+        // Aquí puedes almacenar la dirección de la wallet o cualquier otra información necesaria
+    } catch (error) {
+        console.error('Error al conectar:', error);
+    }
+}
+
 	// cargar pubKey de stellar
 	let addr: string = localStorage.getItem('addr') || '';
 
@@ -77,5 +111,8 @@
 		>
 			<Wallet address={addr} pasword={priv} />
 		</Card>
+		<button on:click={connectWallet} class="btn">
+			Conectar Wallet connect
+		</button>
 	</div>
 </main>
