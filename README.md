@@ -13,6 +13,8 @@ npm install
 
 npm run dev
 
+npm i @reown/walletkit @walletconnect/utils @walletconnect/core
+
 
 Listo! ahora podremos ingresar al browser en este link:
 http://localhost:5173/
