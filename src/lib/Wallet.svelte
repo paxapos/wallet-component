@@ -124,6 +124,7 @@
 
 <div class="flex items-center flex-wrap gap-4">
 	{#if paymentDone}
+	{#if paymentRealized}
 		<div
 			class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
 			role="alert"
@@ -134,7 +135,7 @@
 			>
 		</div>
 	{/if}
-
+	{/if}
 	<h1 class="text-gray-800 text-3xl sixa-max">{saldoFormateado}</h1>
 	<ButtonGroup>
 		<Button
