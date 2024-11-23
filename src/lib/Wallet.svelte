@@ -12,6 +12,7 @@
 	} from 'flowbite-svelte';
 	import { BellSolid, EyeSolid } from 'flowbite-svelte-icons';
 	import { eventSourceListener } from '../service/blockchains/stellar';
+	//import { getTransactions } from '../service/blockchains/stellar';
 	import { horizonEventSource } from '../service/blockchains/stellar';
 	import { paymentsdones } from '../service/blockchains/stellar';
 	import { paymentRealized } from '../service/blockchains/stellar';
@@ -51,20 +52,25 @@
 	getBalance(address).then((res) => {
 		saldo = res;
 	});
-
+	let listTransactions:object[]=[]
 	$: if (address.length == 56) {
+
 		eventSourceListener(
 			address,
 			async (res: any) => {
 				console.info('me llego un mensaje', res);
+				listTransactions.push(res)
 				saldo = await getBalance(address);
+				console.log(listTransactions)
 			},
 			(msgError: any) => {
-				console.error('me paso algo malisimo', msgError);
+				//console.error('me paso algo malisimo', msgError);
 			},
 		);
+		
 	}
 	$: if (address.length !== 56) {
+		listTransactions=[]
 		horizonEventSource?.close();
 		console.log(saldo);
 		saldo = 0;
