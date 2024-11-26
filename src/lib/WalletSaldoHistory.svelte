@@ -1,4 +1,5 @@
 <script lang="ts">
+	import  listTransactions  from '../lib/Wallet.svelte';
 </script>
 
 	<div class="p-4 ">
