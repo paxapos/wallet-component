@@ -52,7 +52,7 @@
 	getBalance(address).then((res) => {
 		saldo = res;
 	});
-	let listTransactions:object[]=[]
+	export let listTransactions:object[]=[]
 	$: if (address.length == 56) {
 
 		eventSourceListener(
