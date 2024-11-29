@@ -62,14 +62,15 @@ export async function getBalance(
  */
 
 export let paymentDone: PaymentDone
-
-export let paymentRealized:boolean
+export let pagoProcess:boolean
+export let paymentRealized:string
 export async function createPayment(
 	monto: number,
 	payer: User,
 	beneficiary: string,
 	assetCode: AssetCodes = AssetCodes.XLM,
 ) {
+	paymentRealized="proceso"
 	try {
 		let sourceKeys = await StellarSdk.Keypair.fromSecret(payer.privKey);
 		let sourceAcount = await server.loadAccount(payer.pubKey);
@@ -94,14 +95,16 @@ export async function createPayment(
 		pruebaArmada.sign(sourceKeys);
 		const pruebaTerminada = await server.submitTransaction(pruebaArmada);
 		console.log(pruebaTerminada);
-		paymentRealized=true
+		paymentRealized="hecho"
 		paymentDone ={
 			amount:monto,
 			destination: beneficiary,
 		};
+		pagoProcess=false
 	} catch (err) {
 		console.log('No se pudo completar la transacción');
-		paymentRealized=false
+		paymentRealized="fallido"
+		pagoProcess=false
 	}
 }
 
