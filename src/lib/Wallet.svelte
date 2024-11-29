@@ -15,7 +15,7 @@
 	//import { getTransactions } from '../service/blockchains/stellar';
 	import { horizonEventSource } from '../service/blockchains/stellar';
 	import { paymentsdones } from '../service/blockchains/stellar';
-	import { paymentRealized } from '../service/blockchains/stellar';
+	import { paymentRealized,pagoProcess } from '../service/blockchains/stellar';
 	import { createEventDispatcher } from 'svelte';
 	export let address: string;
 	export let pasword: string;
@@ -123,19 +123,7 @@
 </Modal>
 
 <div class="flex items-center flex-wrap gap-4">
-	{#if paymentDone}
-	{#if paymentRealized}
-		<div
-			class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
-			role="alert"
-		>
-			<strong class="font-bold">Pago realizado!</strong>
-			<span class="block sm:inline"
-				>Se envió {paymentDone.amount} a {paymentDone.destination}</span
-			>
-		</div>
-	{/if}
-	{/if}
+
 	<h1 class="text-gray-800 text-3xl sixa-max">{saldoFormateado}</h1>
 	<ButtonGroup>
 		<Button
@@ -212,4 +200,76 @@
 			</svg>
 		</Button>
 	</ButtonGroup>
+	<div class="payRealized ">
+		{#if paymentRealized=="proceso"}
+		<div class="loader"></div>
+		{/if}
+		{#if paymentDone}
+		
+		{#if paymentRealized=="hecho"}
+			<div
+				class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
+				role="alert"
+			>
+				<strong class="font-bold">Pago realizado!</strong>
+				<span class="block sm:inline"
+					>Se envió {paymentDone.amount} a {paymentDone.destination}</span
+				>
+			</div>
+		{/if}
+		{#if paymentRealized=="fallido"}
+			<div
+				class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+				role="alert"
+			>
+				<strong class="font-bold">Pago fallido!</strong>
+				<span class="block sm:inline"
+					>No se envió {paymentDone.amount} a {paymentDone.destination}</span
+				>
+			</div>
+		{/if}
+
+		{/if}
+	</div>
 </div>
+<style>
+	.loader {
+	  width: 48px;
+	  height: 48px;
+	  border: 3px solid #FFF;
+	  border-radius: 50%;
+	  display: inline-block;
+	  position: relative;
+	  box-sizing: border-box;
+	  animation: rotation 1s linear infinite;
+	}
+  
+	.loader::after {
+	  content: ''; 
+	  box-sizing: border-box;
+	  position: absolute;
+	  left: 50%;
+	  top: 50%;
+	  transform: translate(-50%, -50%);
+	  width: 40px;
+	  height: 40px;
+	  border-radius: 50%;
+	  border: 3px solid;
+	  border-color: #FF3D00 transparent;
+	}
+  
+	@keyframes rotation {
+	  0% {
+		transform: rotate(0deg);
+	  }
+	  100% {
+		transform: rotate(360deg);
+	  }
+	}
+	.payRealized{
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+  </style>
