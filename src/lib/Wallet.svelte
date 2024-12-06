@@ -15,7 +15,7 @@
 	//import { getTransactions } from '../service/blockchains/stellar';
 	import { horizonEventSource } from '../service/blockchains/stellar';
 	import { paymentsdones } from '../service/blockchains/stellar';
-	import { paymentRealized,pagoProcess } from '../service/blockchains/stellar';
+	import { paymentRealized } from '../service/blockchains/stellar';
 	import { createEventDispatcher } from 'svelte';
 	export let address: string;
 	export let pasword: string;
@@ -201,11 +201,11 @@
 		</Button>
 	</ButtonGroup>
 	<div class="payRealized ">
+
+		{#if paymentDone}
 		{#if paymentRealized=="proceso"}
 		<div class="loader"></div>
 		{/if}
-		{#if paymentDone}
-		
 		{#if paymentRealized=="hecho"}
 			<div
 				class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
@@ -217,18 +217,33 @@
 				>
 			</div>
 		{/if}
-		{#if paymentRealized=="fallido"}
+		{#if paymentRealized=="fallido" && (paymentDone.amount==undefined || paymentDone.amount<=0)}
+			<div
+				class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+				role="alert"
+			>
+				<strong class="font-bold">¡No se pueden enviar montos nulos o negativos!</strong>
+			</div>
+		{/if}
+		{#if paymentRealized=="fallido" && (paymentDone.destination==undefined || paymentDone.destination.length!==56)}
+			<div
+				class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+				role="alert"
+			>
+				<strong class="font-bold">¡Cuenta de destino invalida!</strong>
+			</div>
+		{/if}
+		{#if paymentRealized=="fallido" && (paymentDone.amount!==undefined && paymentDone.amount>0 ) && ( paymentDone.destination!==undefined && paymentDone.destination.length==56 )}
 			<div
 				class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
 				role="alert"
 			>
 				<strong class="font-bold">Pago fallido!</strong>
 				<span class="block sm:inline"
-					>No se envió {paymentDone.amount} a {paymentDone.destination}</span
+					>No se pudo enviar {paymentDone.amount} a {paymentDone.destination}</span
 				>
 			</div>
 		{/if}
-
 		{/if}
 	</div>
 </div>
