@@ -62,7 +62,6 @@ export async function getBalance(
  */
 
 export let paymentDone: PaymentDone
-export let pagoProcess:boolean
 export let paymentRealized:string
 export async function createPayment(
 	monto: number,
@@ -100,11 +99,9 @@ export async function createPayment(
 			amount:monto,
 			destination: beneficiary,
 		};
-		pagoProcess=false
 	} catch (err) {
-		console.log('No se pudo completar la transacción');
+		console.log(err);
 		paymentRealized="fallido"
-		pagoProcess=false
 	}
 }
 
