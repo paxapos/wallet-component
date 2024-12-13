@@ -71,10 +71,10 @@ export async function createPayment(
 ) {
 	paymentRealized="proceso"
 	try {
-		let sourceKeys = await StellarSdk.Keypair.fromSecret(payer.privKey);
-		let sourceAcount = await server.loadAccount(payer.pubKey);
+		const sourceKeys = await StellarSdk.Keypair.fromSecret(payer.privKey);
+		const sourceAcount = await server.loadAccount(payer.pubKey);
 
-		var transaction = new StellarSdk.TransactionBuilder(sourceAcount, {
+		const transaction = new StellarSdk.TransactionBuilder(sourceAcount, {
 			fee: StellarSdk.BASE_FEE,
 			networkPassphrase: network,
 		});
@@ -86,9 +86,9 @@ export async function createPayment(
 				asset: Asset.native(),
 			}),
 		);
-		let operation2 = operation1.setTimeout(100);
+		const operation2 = operation1.setTimeout(100);
 
-		let pruebaArmada = operation2.build();
+		const pruebaArmada = operation2.build();
 		console.log(pruebaArmada);
 
 		pruebaArmada.sign(sourceKeys);
