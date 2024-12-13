@@ -32,15 +32,16 @@
 	async function submitForm() {
 		// Aquí puedes agregar la lógica para manejar el envío del formulario
 		console.log(`Amount: ${amount}, Recipient: ${recipient}`);
-
+		cargando=true
 		const seEnvio = await createPayment(amount, stellarAccount, recipient);
-
+		cargando=false
 		const paymentDone: PaymentDone = {
 			amount,
 			destination: recipient,
 		};
 		dispatcher('paymentDone', paymentDone);
 	}
+	let cargando=false
 </script>
 
 <div
@@ -88,9 +89,16 @@
 					recipient = '';
 				}}>Cancelar</button
 			>
-			<button
+			<button disabled={cargando}
 				class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
-				on:click={submitForm}>Enviar</button
+				on:click={submitForm}>
+				{#if cargando}
+				Enviando
+				{:else}
+				Enviar
+				{/if}
+
+				</button
 			>
 		</div>
 	</div>
