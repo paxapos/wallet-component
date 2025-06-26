@@ -1,7 +1,7 @@
 # Wallet Component
 
 Se trata de un web component hecho en Svelte
-y conecta una blockchain con esta wallet
+y conecta Stellar blockchain con esta wallet
 
 # Como comenzar a desarrollar
 
